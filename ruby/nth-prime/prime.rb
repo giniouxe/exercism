@@ -1,7 +1,14 @@
+require 'mathn'
+
 class Prime
 
+  PRIMES = self.first(100_000)
+
   def self.nth(position)
-    @primes = self.first(10)
-    @primes[position - 1]
+    if position == 0
+      raise ArgumentError
+    else
+      PRIMES[position - 1]
+    end
   end
 end
