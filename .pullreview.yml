@@ -1,0 +1,6 @@
+---
+rules:
+  ignore:
+  - add_underscores_to_large_numeric
+  - missing_class_documentation
+  - missing_method_documentation
