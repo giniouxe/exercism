@@ -1,8 +1,8 @@
+# Calculate Hamming distance
 class Hamming
-  #Calculate Hamming distance
 
+  # Counts hamming distance between to DNA strings
   def self.compute(origin, mutation)
-    #Counts hamming distance between to DNA strings
 
     pairs = origin.split('').zip(mutation.split(''))
     count = 0
