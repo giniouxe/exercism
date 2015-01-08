@@ -1,3 +1,4 @@
+# Manipulate squares
 class Squares
 
   def initialize(number)
@@ -9,7 +10,7 @@ class Squares
   end
 
   def sum_of_squares
-    @range.inject { |sum, n| sum += n**2}
+    @range.inject { |sum, n| sum += n**2 }
   end
 
   def difference
