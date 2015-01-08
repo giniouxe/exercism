@@ -3,11 +3,11 @@ class Robot
   AVAILABLE_LETTERS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
   def initialize
-    @name = ""
+    @name = ''
   end
 
   def name
-    if @name == ""
+    if @name == ''
       @name = (AVAILABLE_LETTERS[rand(52), 2] + rand(100..999).to_s)
     else
       @name = @name
@@ -15,7 +15,7 @@ class Robot
   end
 
   def reset
-    @name = ""
+    @name = ''
   end
 
 end
