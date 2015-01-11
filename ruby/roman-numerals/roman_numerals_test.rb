@@ -82,6 +82,10 @@ class RomanTest < MiniTest::Test
     assert_equal 'CMXI', 911.to_roman
   end
 
+  def test_999
+    assert_equal 'CMXCIX', 999.to_roman
+  end
+
   def test_1024
     assert_equal 'MXXIV', 1024.to_roman
   end
