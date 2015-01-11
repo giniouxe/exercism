@@ -2,8 +2,8 @@ require 'minitest/autorun'
 begin
   require_relative 'hamming'
 rescue LoadError => e
-  puts "\n\n#{e.backtrace.first} #{e.message}"
-  puts DATA.read
+  logger.warn("\n\n#{e.backtrace.first} #{e.message}")
+  logger.warn(DATA.read)
   exit 1
 end
 
