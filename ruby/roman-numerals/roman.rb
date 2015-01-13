@@ -1,5 +1,8 @@
 class Integer
 
+  ARABIC = 0
+  ROMAN = 1
+
   def to_roman
     number = self
     romans = [[1000, 'M'],
@@ -19,11 +22,12 @@ class Integer
     result = ''
 
     romans.each do |pair|
-      if number >= pair[0]
-        result << pair[1] * number.div(pair[0])
-        number = number % pair[0]
+      if number >= pair[ARABIC]
+        result << pair[ROMAN] * number.div(pair[ARABIC])
+        number = number % pair[ARABIC]
       end
     end
+
     result
 
   end
