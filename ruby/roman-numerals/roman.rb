@@ -1,10 +1,8 @@
 class Integer
 
-  ARABIC = 0
-  ROMAN = 1
-
   def to_roman
     number = self
+
     romans = [[1000, 'M'],
               [900, 'CM'],
               [500, 'D'],
@@ -22,14 +20,14 @@ class Integer
     result = ''
 
     romans.each do |pair|
-      if number >= pair[ARABIC]
-        result << pair[ROMAN] * number.div(pair[ARABIC])
-        number = number % pair[ARABIC]
+      arabic, roman = pair
+      quotient, remainder = number.divmod(arabic)
+      if number >= arabic
+        result << roman * quotient
+        number = remainder
       end
     end
-
     result
-
   end
 
 end
