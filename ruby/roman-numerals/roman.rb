@@ -1,9 +1,5 @@
-class Integer
-
-  def to_roman
-    number = self
-
-    romans = [[1000, 'M'],
+module Roman
+    ROMANS = [[1000, 'M'],
               [900, 'CM'],
               [500, 'D'],
               [400, 'CD'],
@@ -17,17 +13,19 @@ class Integer
               [4, 'IV'],
               [1, 'I']]
 
+  def to_roman
+    number = self
     result = ''
 
-    romans.each do |pair|
-      arabic, roman = pair
+    ROMANS.each do |arabic, roman|
       quotient, remainder = number.divmod(arabic)
-      if number >= arabic
         result << roman * quotient
         number = remainder
-      end
     end
     result
   end
+end
 
+class Integer
+  include Roman
 end
