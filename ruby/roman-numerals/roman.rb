@@ -19,8 +19,8 @@ module Roman
 
     ROMANS.each do |arabic, roman|
       quotient, remainder = number.divmod(arabic)
-        result << roman * quotient
-        number = remainder
+      result << roman * quotient
+      number = remainder
     end
     result
   end
