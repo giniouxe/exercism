@@ -8,7 +8,7 @@ defmodule Teenager do
         -> "Whoa, chill out!"
       question?(input)
         -> "Sure."
-      stating?(input)
+      true
         -> "Whatever."
     end
   end
@@ -23,9 +23,5 @@ defmodule Teenager do
 
   defp question?(input) do
     String.ends_with?(input, "?")
-  end
-
-  defp stating?(input) do
-    String.length(input) > 0
   end
 end
