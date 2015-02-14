@@ -6,11 +6,11 @@ class Squares
   end
 
   def square_of_sums
-    @range.inject { |sums, n| (sums += n) } ** 2
+    @range.inject { |sums, n| (sums + n) } ** 2
   end
 
   def sum_of_squares
-    @range.inject { |sum, n| sum += n**2 }
+    @range.inject { |sum, n| sum + n**2 }
   end
 
   def difference
