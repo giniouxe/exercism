@@ -1,6 +1,6 @@
 class Robot
 
-  AVAILABLE_LETTERS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  LETTERS = ('A'..'z').to_a.join
 
   def initialize
     @name = ''
@@ -8,7 +8,8 @@ class Robot
 
   def name
     if @name == ''
-      @name = (AVAILABLE_LETTERS[rand(52), 2] + rand(100..999).to_s)
+      @name << LETTERS[rand(LETTERS.length), 2]
+      @name << rand(100..999).to_s
     else
       @name = @name
     end
