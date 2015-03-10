@@ -1,6 +1,6 @@
 class Series
 	def initialize(chain)
-		@digits = chain.chars.map! { |n| n.to_i }
+		@digits = chain.chars.map { |n| n.to_i }
 	end
 
 	def slices(limit)
