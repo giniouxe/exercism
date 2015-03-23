@@ -9,7 +9,6 @@ class ArrayTest < MiniTest::Test
   def test_accumulate_squares
     result = [1, 2, 3].accumulate { |number|
       number * number }
-    end
     assert_equal [1, 4, 9], result
   end
 
