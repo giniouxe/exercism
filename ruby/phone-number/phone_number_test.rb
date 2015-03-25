@@ -47,6 +47,11 @@ class PhoneNumberTest < MiniTest::Test
     assert_equal '0000000000', number
   end
 
+  def test_invalid_when_11_digits_with_extra_letters_and_first_is_1
+    number = PhoneNumber.new('1abcdefghij').number
+    assert_equal '0000000000', number
+  end
+  
   def test_area_code
     number = PhoneNumber.new('1234567890')
     assert_equal '123', number.area_code

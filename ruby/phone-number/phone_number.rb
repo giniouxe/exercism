@@ -9,10 +9,10 @@ class PhoneNumber
 
   # Filter wrong phone numbers and clean long stance calls
   def number
-    if @phone.length == 11 && @phone[0] == '1'
-      @phone[1..@phone.length]
-    elsif @phone.match(/[a-zA-Z]/)
+    if @phone.match(/[a-zA-Z]/)
       DEFAULT
+    elsif @phone.length == 11 && @phone[0] == '1'
+      @phone[1..@phone.length]
     elsif @phone.length <= 9 || @phone.length >= 11
       DEFAULT
     else
