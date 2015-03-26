@@ -1,9 +1,9 @@
 class Array
-	def keep(&sieve)
+	def keep
 		self.keep_if { |item| yield(item) }
 	end
 
-	def discard(&sieve)
+	def discard
 		self.reject { |item| yield(item) }
 	end
 end
