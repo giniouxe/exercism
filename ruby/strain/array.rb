@@ -14,7 +14,7 @@ class Array
 
     [].tap do |collection|
       each do |element|
-        collection << element if !yield(element)
+        collection << element unless yield(element)
       end
     end
   end
