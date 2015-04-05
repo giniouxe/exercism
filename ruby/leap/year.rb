@@ -1,15 +1,18 @@
+# Reports if a year is leap.
 class Year
-
   def self.leap?(year)
-    if year % 400 == 0
-      true
-    elsif year % 100 == 0
-      false
-    elsif year % 4 == 0
-      true
-    else
-      false
-    end
+    multiple_of_400?(year) || !multiple_of_100?(year) && multiple_of_4?(year)
   end
 
+  def self.multiple_of_400?(year)
+    year % 400 == 0
+  end
+
+  def self.multiple_of_100?(year)
+    year % 100 == 0
+  end
+
+  def self.multiple_of_4?(year)
+    year % 4 == 0
+  end
 end
