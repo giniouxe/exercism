@@ -1,14 +1,13 @@
-require 'prime'
-
 # Computes the prime factors of a given natural number.
 class PrimeFactors
   def self.for(number)
-    primes = (2..number).select(&:prime?)
-
-    [].tap do |prime_factors|
+    divisor = 2
+    [].tap do |factors|
       while number > 1
-        primes.each do |prime|
-          prime_factors << prime && number /= prime if number % prime == 0
+        if number % divisor == 0
+          factors << divisor && number /= divisor
+        else
+          divisor += 1
         end
       end
     end
