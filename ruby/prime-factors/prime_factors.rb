@@ -5,7 +5,8 @@ class PrimeFactors
     [].tap do |factors|
       while number > 1
         if number % divisor == 0
-          factors << divisor && number /= divisor
+          factors << divisor
+          number /= divisor
         else
           divisor += 1
         end
