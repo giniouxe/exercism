@@ -1,47 +1,24 @@
 # Given an age in seconds, calculates how old someone is in terms of a given
 # planet's solar years.
 class SpaceAge
-  EARTH_YEAR = 31_557_600
+  ORBITAL_PERIODS = {
+    earth:   31_557_600,
+    mercury: 7_600_543.819,
+    venus:   19_414_149.052,
+    mars:    59_354_032.690,
+    jupiter: 374_355_659.124,
+    saturn:  929_292_362.884,
+    uranus:  2_651_370_019.329,
+    neptune: 5_200_418_560.032
+  }
 
-  attr_reader :age
+  attr_reader :seconds
 
   def initialize(age)
-    @age = age
+    @seconds = age
   end
 
-  def seconds
-    age
-  end
-
-  def on_earth
-    age.fdiv(EARTH_YEAR)
-  end
-
-  def on_mercury
-    on_earth / 0.2408467
-  end
-
-  def on_venus
-    on_earth / 0.61519726
-  end
-
-  def on_mars
-    on_earth / 1.8808158
-  end
-
-  def on_jupiter
-    on_earth / 11.862615
-  end
-
-  def on_saturn
-    on_earth / 29.447498
-  end
-
-  def on_uranus
-    on_earth / 84.016846
-  end
-
-  def on_neptune
-    on_earth / 164.79132
+  ORBITAL_PERIODS.each do |planet, period_in_seconds|
+    define_method("on_#{planet}".to_sym) { seconds.fdiv(period_in_seconds) }
   end
 end
