@@ -1,19 +1,26 @@
 class FoodChainSong
-
-  def initialize
-    @animals = { 1 => 'fly', 2 => 'spider', 3 => 'bird', 4 => 'cat', 5 => 'dog',
-                 6 => 'goat', 7 => 'cow', 8 => 'horse' }
-    @comments = { 1 => '',
-                  2 => "It wriggled and jiggled and tickled inside her.\n",
-                  3 => "How absurd to swallow a bird!\n",
-                  4 => "Imagine that, to swallow a cat!\n",
-                  5 => "What a hog, to swallow a dog!\n",
-                  6 => "Just opened her throat and swallowed a goat!\n",
-                  7 => "I don't know how she swallowed a cow!\n" }
-  end
+  ANIMALS = {
+    1 => 'fly',
+    2 => 'spider',
+    3 => 'bird',
+    4 => 'cat',
+    5 => 'dog',
+    6 => 'goat',
+    7 => 'cow',
+    8 => 'horse'
+  }
+  COMMENTS = {
+    1 => '',
+    2 => "It wriggled and jiggled and tickled inside her.\n",
+    3 => "How absurd to swallow a bird!\n",
+    4 => "Imagine that, to swallow a cat!\n",
+    5 => "What a hog, to swallow a dog!\n",
+    6 => "Just opened her throat and swallowed a goat!\n",
+    7 => "I don't know how she swallowed a cow!\n"
+  }
 
   def verse(number)
-    verse = ""
+    verse = ''
     verse << swallowed(number)
     verse << comment(number)
     verse << reason(number)
@@ -42,18 +49,18 @@ class FoodChainSong
   end
 
   def swallowed(number)
-    "I know an old lady who swallowed a #{@animals[number]}.\n"
+    "I know an old lady who swallowed a #{ANIMALS[number]}.\n"
   end
 
   def comment(number)
-    "#{@comments[number]}"
+    "#{COMMENTS[number]}"
   end
 
   def reason(number)
-    reason = ""
+    reason = ''
     if (1..7).include?(number)
       until number == 1
-        reason << "She swallowed the #{@animals[number]} to catch the #{@animals[number - 1]}"
+        reason << "She swallowed the #{ANIMALS[number]} to catch the #{ANIMALS[number - 1]}"
         reason << ' that wriggled and jiggled and tickled inside her' if number == 3
         reason << ".\n"
         number -= 1
