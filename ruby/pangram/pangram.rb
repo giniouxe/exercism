@@ -1,12 +1,13 @@
 require 'active_support/inflector'
 
+# Problems' version tracking
 module BookKeeping
   VERSION = 2
 end
 
+# Used to determine if a sentence is a pangram
 class Pangram
-
-  ALPHABET = %w[a b c d e f g h i j k l m n o p q r s t u v w x y z]
+  ALPHABET = %w(a b c d e f g h i j k l m n o p q r s t u v w x y z)
 
   attr_reader :sentence
 
@@ -26,5 +27,4 @@ class Pangram
     string = ActiveSupport::Inflector.transliterate(sentence)
     string.downcase.gsub(/\d/, '').tr(' _."', '')
   end
-
 end
