@@ -38,6 +38,18 @@ class RunLengthEncodingTest < Minitest::Test
     assert_equal output, RunLengthEncoding.decode(input)
   end
 
+  def test_encode_with_spaces
+    input = 'zzz ZZ  zZ'
+    output = '3z 2Z2 zZ'
+    assert_equal output, RunLengthEncoding.encode(input)
+  end
+
+  def test_decode_with_spaces
+    input = '3z 2Z2 zZ'
+    output = 'zzz ZZ  zZ'
+    assert_equal output, RunLengthEncoding.decode(input)
+  end
+
   def test_decode_encode_combination
     input = 'zzz ZZ  zZ'
     output = 'zzz ZZ  zZ'
@@ -46,14 +58,12 @@ class RunLengthEncodingTest < Minitest::Test
   end
 
   def test_encode_unicode
-    skip
     input = '⏰⚽⚽⚽⭐⭐⏰'
     output = '⏰3⚽2⭐⏰'
     assert_equal output, RunLengthEncoding.encode(input)
   end
 
   def test_decode_unicode
-    skip
     input = '⏰3⚽2⭐⏰'
     output = '⏰⚽⚽⚽⭐⭐⏰'
     assert_equal output, RunLengthEncoding.decode(input)

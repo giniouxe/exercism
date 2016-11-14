@@ -29,29 +29,33 @@ class RunLengthEncoding
     end
 
     def map_encoded(input)
-      sequences = split_with_numbers(input)
+      sequences = split_at_numbers(input)
 
-      sequences.map! { |seq| seq.split(' ') }
+      sequences.map! { |seq| seq.split('::') }
       sequences.map! do |pair|
-        if pair.length == 1
-          [1, pair.last]
-        else
+        if integer?(pair.first)
           [pair.first.to_i, pair.last]
+        else
+          [1, pair.last]
         end
       end
     end
 
-    def split_with_numbers(input)
+    def split_at_numbers(input)
       sequence = ''
       input.chars.each_with_object([]) do |char, sequences|
-        if char.to_i != 0
+        if integer?(char)
           sequence += char
         else
-          sequence << ' ' << char
+          sequence << '::' << char
           sequences << sequence
           sequence = ''
         end
       end
+    end
+
+    def integer?(string)
+      /\A\d+\z/.match(string)
     end
   end
 end
