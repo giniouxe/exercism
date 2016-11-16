@@ -1,5 +1,3 @@
-require 'pry'
-
 # Run-length encoding and decoding
 class RunLengthEncoding
   class << self
