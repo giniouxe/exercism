@@ -1,10 +1,5 @@
 require 'active_support/inflector'
 
-# Problems' version tracking
-module BookKeeping
-  VERSION = 2
-end
-
 # Used to determine if a sentence is a pangram
 class Pangram
   ALPHABET = ('a'..'z').to_a
@@ -16,15 +11,22 @@ class Pangram
   end
 
   def self.is_pangram?(sentence)
-    new(sentence).unique_letters == ALPHABET
+    new(sentence).include_all_alphabet?
   end
 
-  def unique_letters
-    sanitized_sentence.split('').sort.uniq
+  def include_all_alphabet?
+    ALPHABET.all? do |letter|
+      sanitized_letters.include?(letter)
+    end
   end
 
-  def sanitized_sentence
+  def sanitized_letters
     string = ActiveSupport::Inflector.transliterate(sentence)
-    string.downcase.gsub(/[^\p{L}]/, '')
+    string.downcase.gsub(/[^\p{L}]/, '').chars
   end
+end
+
+# Problems' version tracking
+module BookKeeping
+  VERSION = 2
 end
