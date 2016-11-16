@@ -25,6 +25,6 @@ class Pangram
 
   def sanitized_sentence
     string = ActiveSupport::Inflector.transliterate(sentence)
-    string.downcase.gsub(/\d/, '').tr(' _."', '')
+    string.downcase.gsub(/[^\p{L}]/, '')
   end
 end
