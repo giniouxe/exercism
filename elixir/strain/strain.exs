@@ -8,10 +8,9 @@ defmodule Strain do
   @spec keep(list :: list(any), fun :: ((any) -> boolean)) :: list(any)
   def keep([], _fun), do: []
   def keep([element | tail], fun) do
-    if fun.(element) do
-      [element | keep(tail, fun)]
-    else
-      keep(tail, fun)
+    cond do
+      fun.(element) == true -> [element | keep(tail, fun)]
+      fun.(element) == false -> keep(tail, fun)
     end
   end
 
@@ -24,10 +23,9 @@ defmodule Strain do
   @spec discard(list :: list(any), fun :: ((any) -> boolean)) :: list(any)
   def discard([], _fun), do: []
   def discard([element | tail], fun) do
-    unless fun.(element) do
-      [element | discard(tail, fun)]
-    else
-      discard(tail, fun)
+    cond do
+      fun.(element) == false -> [element | discard(tail, fun)]
+      fun.(element) == true -> discard(tail, fun)
     end
   end
 end
