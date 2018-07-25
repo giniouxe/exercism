@@ -8,18 +8,13 @@ defmodule RNATranscription do
   'UGAC'
   """
   @mapping %{
-    71 => 'C',
-    67 => 'G',
-    84 => 'A',
-    65 => 'U'
+    ?G => ?C,
+    ?C => ?G,
+    ?T => ?A,
+    ?A => ?U
   }
   @spec to_rna([char]) :: [char]
   def to_rna(dna) do
-    rna_complement(dna) |> List.to_string |> String.to_charlist
+    Enum.map(dna, fn(x) -> Map.fetch!(@mapping, x) end)
   end
-
-  def rna_complement([head | tail]) do
-    [Map.fetch!(@mapping, head) | rna_complement(tail)]
-  end
-  def rna_complement([]) do [] end
 end
