@@ -19,19 +19,19 @@ defmodule Roman do
   ]
   @spec numerals(pos_integer) :: String.t()
   def numerals(number) do
-    collect_roman_numerals([], number)
-    |> Enum.join("")
+    collect_roman_numerals("", number)
   end
 
-  defp collect_roman_numerals(list, 0) do
-    Enum.reverse(list)
+  defp collect_roman_numerals(string, 0) do
+    string
   end
-  defp collect_roman_numerals(list, number) do
+  defp collect_roman_numerals(string, number) do
     {divisor, roman_numeral} = highest_divisor_for(number)
-    collect_roman_numerals([roman_numeral | list], number - divisor)
+    String.replace_suffix(string, "", roman_numeral)
+    |> collect_roman_numerals(number - divisor)
   end
 
   defp highest_divisor_for(number) do
-    Enum.find(@mapping, fn(x) -> Integer.floor_div(number, elem(x, 0)) > 0 end)
+    Enum.find(@mapping, fn(x) -> number >= elem(x, 0) end)
   end
 end
