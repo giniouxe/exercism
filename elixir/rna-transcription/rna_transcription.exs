@@ -15,6 +15,6 @@ defmodule RNATranscription do
   }
   @spec to_rna([char]) :: [char]
   def to_rna(dna) do
-    Enum.map(dna, fn(x) -> Map.fetch!(@mapping, x) end)
+    Enum.map(dna, fn(x) -> Map.get(@mapping, x) end)
   end
 end
