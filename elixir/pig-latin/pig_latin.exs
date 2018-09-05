@@ -13,6 +13,7 @@ defmodule PigLatin do
 
   Some groups are treated like vowels, including "yt" and "xr".
   """
+  @x_y_regex ~r/^(y|x)[^aeiou]/
   @consonants_regex ~r/^[^aeiou]+((?<=q)u)*/
   @spec translate(phrase :: String.t()) :: String.t()
   def translate(phrase) do
@@ -23,7 +24,7 @@ defmodule PigLatin do
 
   def translate_word(word) do
     cond do
-      String.match?(word, ~r/^(y|x)[^aeiou]/) ->
+      String.match?(word, @x_y_regex) ->
         add_suffix(word)
       String.match?(word, @consonants_regex) ->
         move_first_consonants_back(word) |> add_suffix
