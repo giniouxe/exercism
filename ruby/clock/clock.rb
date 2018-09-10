@@ -17,15 +17,13 @@ class Clock
   end
 
   def +(other)
-    @hour += other.hour
-    @minute += other.minute
-    to_s
+    clock = Clock.new(hour: @hour + other.hour, minute: @minute + other.minute)
+    clock.to_s
   end
 
   def -(other)
-    @hour -= other.hour
-    @minute -= other.minute
-    to_s
+    clock = Clock.new(hour: @hour - other.hour, minute: @minute - other.minute)
+    clock.to_s
   end
 
   def ==(other)
@@ -43,19 +41,11 @@ class Clock
   end
 
   def convert_minutes_to_hours
-    while @minute < 0
-      @hour -= 1
-      @minute += 60
-    end
-
-    while @minute >= 60
-      @hour += 1
-      @minute -= 60
-    end
+    @hour += @minute.div(60)
+    @minute %= 60
   end
 
   def convert_hours_to_24_format
-    @hour += 24 while @hour < 0
-    @hour -= 24 while @hour >= 24
+    @hour %= 24
   end
 end
