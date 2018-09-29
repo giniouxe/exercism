@@ -11,7 +11,7 @@ class Scrabble
   }.freeze
 
   def initialize(word)
-    @word = word
+    @word = upcased(word)
   end
 
   def self.score(word)
@@ -19,15 +19,16 @@ class Scrabble
   end
 
   def score
-    letters.inject(0) do |score, letter|
-      POINTS.each { |key, value| score += value if key.include?(letter) }
-      score
-    end
+    POINTS.sum { |(letters, points)| sum_points_for(letters, points) }
   end
 
   private
 
-  def letters
-    @word.to_s.gsub(/\W/, '').upcase.split('')
+  def upcased(word)
+    word.to_s.upcase
+  end
+
+  def sum_points_for(letters, points)
+    letters.chars.sum { |letter| @word.count(letter) * points }
   end
 end
