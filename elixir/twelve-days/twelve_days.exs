@@ -33,7 +33,7 @@ defmodule TwelveDays do
     }
   @spec verse(number :: integer) :: String.t()
   def verse(number) do
-    verse = get_day(number) <> collect_gifts(number)
+    verse = get_day(number) <> get_gifts(number)
     cond do
       number > 1 -> String.replace(verse, ", a", ", and a")
       true -> verse
@@ -58,10 +58,10 @@ defmodule TwelveDays do
   end
 
   defp get_day(number) do
-    "On the #{Map.get(@days, number)} day of Christmas my true love gave to me,"
+    "On the #{Map.get(@days, number)} day of Christmas my true love gave to me: "
   end
 
-  defp collect_gifts(number) do
+  defp get_gifts(number) do
     Enum.map_join((number..1), " ", &(Map.get(@gifts, &1)))
   end
 end
