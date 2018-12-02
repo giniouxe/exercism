@@ -8,9 +8,7 @@ class Matrix
   end
 
   def columns
-    rows.each_with_object(Array.new(rows.length) { [] }) do |cells, columns|
-      columns.each_with_index { |column, index| column << cells[index] }
-    end
+    rows.transpose
   end
 
   private
