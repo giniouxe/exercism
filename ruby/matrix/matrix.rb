@@ -14,6 +14,6 @@ class Matrix
   private
 
   def cells_for(row)
-    row.split(' ').map(&:to_i)
+    row.split.map(&:to_i)
   end
 end
