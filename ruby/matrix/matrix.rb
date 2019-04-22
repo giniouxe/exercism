@@ -1,6 +1,6 @@
 class Matrix
   def initialize(data)
-    @data = data.split("\n")
+    @data = data.each_line
   end
 
   def rows
