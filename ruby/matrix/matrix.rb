@@ -4,7 +4,7 @@ class Matrix
   end
 
   def rows
-    @data.each_with_object([]) { |row, rows| rows << cells_for(row) }
+    @data.map { |row| cells_for(row) }
   end
 
   def columns
