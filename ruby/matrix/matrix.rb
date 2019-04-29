@@ -1,10 +1,10 @@
 class Matrix
   def initialize(data)
-    @data = data.each_line
+    @data = data
   end
 
   def rows
-    @data.map { |row| cells_for(row) }
+    @data.each_line.map { |row| cells_for(row) }
   end
 
   def columns
