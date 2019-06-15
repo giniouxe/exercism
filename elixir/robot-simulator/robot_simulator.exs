@@ -40,8 +40,11 @@ defmodule RobotSimulator do
   @spec simulate(robot :: any, instructions :: String.t()) :: any
   def simulate(robot, instructions) do
     case instructions |> String.split("", trim: true) |> move(robot.direction, robot.position) do
-      %{direction: direction, position: position} -> %{robot | direction: direction, position: position}
-      _ -> {:error, "invalid instruction"}
+      %{direction: direction, position: position} ->
+        %{robot | direction: direction, position: position}
+
+      _ ->
+        {:error, "invalid instruction"}
     end
   end
 
@@ -60,15 +63,19 @@ defmodule RobotSimulator do
   def position(robot), do: robot.position
 
   defp move([], direction, position), do: %{direction: direction, position: position}
+
   defp move(["L" | instructions], direction, position) do
     move(instructions, turn_left(direction), position)
   end
+
   defp move(["R" | instructions], direction, position) do
     move(instructions, turn_rigth(direction), position)
   end
+
   defp move(["A" | instructions], direction, position) do
     move(instructions, direction, advance(direction, position))
   end
+
   defp move([_ | _], _, _), do: {:error}
 
   defp turn_left(:north), do: :west
@@ -81,8 +88,8 @@ defmodule RobotSimulator do
   defp turn_rigth(:south), do: :west
   defp turn_rigth(:west), do: :north
 
-  defp advance(:north, {x, y}), do: {x, (y + 1)}
-  defp advance(:east, {x, y}), do: {(x + 1), y}
+  defp advance(:north, {x, y}), do: {x, y + 1}
+  defp advance(:east, {x, y}), do: {x + 1, y}
   defp advance(:south, {x, y}), do: {x, y - 1}
-  defp advance(:west, {x, y}), do: {(x - 1), y}
+  defp advance(:west, {x, y}), do: {x - 1, y}
 end
