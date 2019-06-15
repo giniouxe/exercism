@@ -54,13 +54,13 @@ defmodule RobotSimulator do
   Valid directions are: `:north`, `:east`, `:south`, `:west`
   """
   @spec direction(robot :: any) :: atom
-  def direction(robot), do: robot.direction
+  def direction(%{direction: direction}), do: direction
 
   @doc """
   Return the robot's position.
   """
   @spec position(robot :: any) :: {integer, integer}
-  def position(robot), do: robot.position
+  def position(%{position: position}), do: position
 
   defp move([], direction, position), do: %{direction: direction, position: position}
 
