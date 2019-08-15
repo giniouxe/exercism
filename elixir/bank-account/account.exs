@@ -1,5 +1,5 @@
 defmodule BankAccount do
-  use GenServer
+  use Agent
 
   @moduledoc """
   A bank account that supports access from multiple processes.
@@ -10,32 +10,9 @@ defmodule BankAccount do
   """
   @opaque account :: pid
 
-  @impl true
-  def init(account) do
-    {:ok, account}
-  end
-
-  # Server callbacks
-  @impl true
-  def handle_call(:balance, _from, account) do
-    {:reply, account, account}
-  end
-
-  @impl true
-  def handle_cast({:update, amount}, account) do
-    {:noreply, account + amount}
-  end
-
-  def handle_cast({:close}, _account) do
-    {:noreply, {:error, :account_closed}}
-  end
-
-  @doc """
-  Open the bank. Makes the account available.
-  """
   @spec open_bank() :: account
   def open_bank() do
-    GenServer.start_link(__MODULE__, 0)
+    Agent.start_link(fn -> 0 end, name: __MODULE__)
   end
 
   @doc """
@@ -43,7 +20,7 @@ defmodule BankAccount do
   """
   @spec close_bank(account) :: none
   def close_bank({:ok, account}) do
-    GenServer.cast(account, {:close})
+    Agent.stop(account, :normal)
   end
 
   @doc """
@@ -51,7 +28,11 @@ defmodule BankAccount do
   """
   @spec balance(account) :: integer
   def balance({:ok, account}) do
-    GenServer.call(account, :balance)
+    if Process.alive?(account) do
+      Agent.get(__MODULE__, & &1)
+    else
+      {:error, :account_closed}
+    end
   end
 
   @doc """
@@ -59,9 +40,10 @@ defmodule BankAccount do
   """
   @spec update(account, integer) :: any
   def update({:ok, account}, amount) do
-    case balance({:ok, account}) do
-      {:error, error} -> {:error, error}
-      _ -> GenServer.cast(account, {:update, amount})
+    if Process.alive?(account) do
+      Agent.update(account, fn state -> state + amount end)
+    else
+      {:error, :account_closed}
     end
   end
 end
