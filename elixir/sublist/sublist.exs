@@ -8,15 +8,13 @@ defmodule Sublist do
   def compare(_a, []), do: :superlist
 
   def compare(a, b) when a == b, do: :equal
+  def compare(a, b) when length(a) >= length(b), do: find_superlist(a, b)
+  def compare(a, b), do: find_sublist(a, b)
 
-  def compare(a, b) do
-    if Enum.count(a) >= Enum.count(b) do
-      case find_sublist(b, a) do
-        :sublist -> :superlist
-        _ -> :unequal
-      end
-    else
-      find_sublist(a, b)
+  defp find_superlist(a, b) do
+    case find_sublist(b, a) do
+      :sublist -> :superlist
+      _ -> :unequal
     end
   end
 
