@@ -8,6 +8,6 @@ defmodule SumOfMultiples do
     |> Enum.filter(fn m ->
       Enum.any?(factors, fn f -> rem(m, f) == 0 end)
     end)
-    |> Enum.reduce(0, fn m, acc -> acc + m end)
+    |> Enum.sum()
   end
 end
