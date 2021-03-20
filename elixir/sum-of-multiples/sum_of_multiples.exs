@@ -5,7 +5,7 @@ defmodule SumOfMultiples do
   @spec to(non_neg_integer, [non_neg_integer]) :: non_neg_integer
   def to(limit, factors) do
     0..(limit - 1)
-    |> Enum.filter(fn m ->
+    |> Stream.filter(fn m ->
       Enum.any?(factors, fn f -> rem(m, f) == 0 end)
     end)
     |> Enum.sum()
