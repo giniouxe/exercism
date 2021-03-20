@@ -1,10 +1,3 @@
-if !System.get_env("EXERCISM_TEST_EXAMPLES") do
-  Code.load_file("sum_of_multiples.exs", __DIR__)
-end
-
-ExUnit.start()
-ExUnit.configure(exclude: :pending, trace: true)
-
 defmodule SumOfMultiplesTest do
   use ExUnit.Case
 
@@ -59,12 +52,6 @@ defmodule SumOfMultiplesTest do
   # @tag :pending
   test "configurable 43, 47 to 10000" do
     multiples = [43, 47]
-    assert SumOfMultiples.to(10_000, multiples) == 2_203_160
-  end
-
-  # @tag :pending
-  test "configurable 43, 47 to 1_000_000" do
-    multiples = [43, 47, 69]
-    assert SumOfMultiples.to(1_000_000, multiples) == 28_945_424_382
+    assert SumOfMultiples.to(10000, multiples) == 2_203_160
   end
 end
