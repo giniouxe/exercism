@@ -61,4 +61,22 @@ class AssemblyLineTest < Minitest::Test
   def test_working_items_per_minute_for_speed_ten
     assert_equal 28, AssemblyLine.new(10).working_items_per_minute
   end
+
+  def test_invalid_for_speed_under_1
+    assert_raises AssemblyLine::InvalidSpeedError do
+      AssemblyLine.new(-1).working_items_per_minute
+    end
+  end
+
+  def test_invalid_for_speed_above_10
+    assert_raises AssemblyLine::InvalidSpeedError do
+      AssemblyLine.new(11).working_items_per_minute
+    end
+  end
+
+  def test_invalid_for_non_integer_speed
+    assert_raises AssemblyLine::InvalidSpeedError do
+      AssemblyLine.new(5.5).working_items_per_minute
+    end
+  end
 end
